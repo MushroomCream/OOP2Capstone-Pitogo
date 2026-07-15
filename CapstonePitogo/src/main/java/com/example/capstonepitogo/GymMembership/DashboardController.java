@@ -3,6 +3,8 @@ package com.example.capstonepitogo.GymMembership;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.awt.event.ActionEvent;
+
 public class DashboardController {
 
     @FXML
@@ -11,19 +13,12 @@ public class DashboardController {
     @FXML
     private Label membershipLabel;
 
-    @FXML
-    private Label attendanceLabel;
-
-    @FXML
-    private Label revenueLabel;
 
     @FXML
     public void initialize() {
 
-        membersLabel.setText("6767");
-        membershipLabel.setText("676767");
-        attendanceLabel.setText("67");
-        revenueLabel.setText("$67");
+        membersLabel.setText("0");
+        membershipLabel.setText("0");
     }
 
     @FXML
@@ -50,5 +45,4 @@ public class DashboardController {
     private void handleLogout() {
         System.out.println("Logout clicked");
     }
-
 }
