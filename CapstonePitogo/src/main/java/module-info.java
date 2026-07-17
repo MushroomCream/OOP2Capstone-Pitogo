@@ -2,6 +2,7 @@ module com.example.capstonepitogo {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires java.sql;
 
 
     opens com.example.capstonepitogo to javafx.fxml;

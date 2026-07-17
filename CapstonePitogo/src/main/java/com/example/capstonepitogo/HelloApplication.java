@@ -16,5 +16,8 @@ public class HelloApplication extends Application {
         stage.setTitle("Capstone-Pitogo");
         stage.setScene(scene);
         stage.show();
+
+        // July 17 > need to implement membership-plans table and attendance table
+
     }
 }

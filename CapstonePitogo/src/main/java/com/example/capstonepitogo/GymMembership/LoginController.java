@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -23,10 +27,46 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if ("admin".equals(username) && "admin123".equals(password)) {
-            loadScene("dashboard-view.fxml");
-        } else {
-            messageLabel.setText("Invalid username or password.");
+        if (username.isEmpty() || password.isEmpty()) {
+            messageLabel.setText("Please enter both username and password.");
+            messageLabel.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
+        String query = "SELECT password, role FROM users WHERE username = ?";
+
+        try (Connection conn = MySQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                String dbPassword = rs.getString("password");
+                String role = rs.getString("role");
+
+
+                if (password.equals(dbPassword)) {
+
+
+                    if ("STAFF".equals(role)) {
+                        loadScene("staffdashboard-view.fxml");
+                    } else {
+                        loadScene("memberdashboard-view.fxml");
+                    }
+
+                } else {
+                    messageLabel.setText("Invalid password.");
+                    messageLabel.setStyle("-fx-text-fill: red;");
+                }
+            } else {
+                messageLabel.setText("User not found.");
+                messageLabel.setStyle("-fx-text-fill: red;");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            messageLabel.setText("Database connection error.");
             messageLabel.setStyle("-fx-text-fill: red;");
         }
     }
