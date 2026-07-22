@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2026 at 06:40 AM
+-- Generation Time: Jul 22, 2026 at 03:36 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -41,7 +41,8 @@ INSERT INTO `attendance` (`id`, `user_id`, `check_in_datetime`) VALUES
 (6, 9, '2026-07-20 11:47:11'),
 (7, 9, '2026-07-20 11:53:37'),
 (8, 9, '2026-07-20 11:59:43'),
-(9, 12, '2026-07-20 12:12:47');
+(9, 12, '2026-07-20 12:12:47'),
+(10, 9, '2026-07-22 08:40:36');
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `membership_plans`
