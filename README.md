@@ -1,6 +1,62 @@
-# Capstone-Pitogo: Gym Membership Management System
-**Developed by:** Gabryle Antonie Pitogo
+# Gym Membership Management System (OOP2 Capstone - Pitogo)
 
+A robust desktop application built using **JavaFX** and **JDBC** to manage gym memberships, member check-ins, payment transactions, and administrative oversight.
+
+---
+
+## 🛠️ Architecture & Core Features
+
+*   **Role-Based Access Control:** Separate dashboards and permissions for **Members** and **Staff/Administrators**.
+*   **Database Integration:** Fully connected to a relational MySQL database via JDBC (`gymmembership`).
+*   **Session Persistence (Java Serialization):** Utilizes `java.io.Serializable` to manage active user sessions securely via a local binary file (`session.dat`), ensuring session persistence across app states and automatic cleanup upon logout.
+
+---
+
+## 📐 Implemented Design Patterns & Principles
+
+To adhere to high software engineering standards and satisfy capstone requirements, this project integrates key Object-Oriented Design Patterns and SOLID principles:
+
+### 1. Creational Pattern: **Singleton Pattern**
+*   **Implementation:** `MySQLConnection`
+*   **Purpose:** Ensures that only a single instance of the database connection manager is created throughout the application's lifecycle, optimizing memory usage and preventing connection leaks.
+
+### 2. Structural Pattern: **Facade Pattern**
+*   **Implementation:** `GymDatabaseFacade`
+*   **Purpose:** Wraps complex JDBC and raw SQL execution logic (`java.sql.*`) behind a clean, simplified interface. This decouples the JavaFX UI controllers from the backend database subsystem.
+
+### 3. Behavioral Pattern: **Strategy Pattern**
+*   **Implementation:** `PricingStrategy` (with `RegularPricing` and `StudentDiscountPricing`)
+*   **Purpose:** Encapsulates different pricing algorithms and makes them interchangeable at runtime. This allows dynamic calculation of subscription fees (e.g., standard rates vs. student discounts) without cluttering controller code.
+
+### 4. Applied SOLID Principles
+*   **Single Responsibility Principle (SRP):** Controllers handle only UI events, the Facade handles database communication, and Strategy classes handle specific calculations.
+*   **Open/Closed Principle (OCP):** New pricing behaviors (e.g., Holiday Discounts) can be added by creating new strategy classes without modifying existing controller or facade code.
+
+---
+
+## 📊 System Diagrams
+
+### Class Diagram Highlights
+*   **Data Models:** `User`, `AttendanceRecord`, `MembershipPlan`, `Payment`
+*   **Controllers:** `LoginController`, `MemberDashboardController`, `StaffDashboardController`, `MemberPlansController`, etc.
+*   **Utilities:** `MySQLConnection` (Singleton) and `UserSession` (`<<Serializable>>`).
+
+### Sequence & Activity Workflow
+*   **Session Management:** Verifies identity via deserialized `session.dat` state.
+*   **Transaction Pipeline:** Triggered via UI $\rightarrow$ Strategy Pattern calculates final pricing $\rightarrow$ Facade Pattern processes transaction $\rightarrow$ Singleton connection executes SQL query.
+
+---
+
+## 🚀 Getting Started
+
+1. **Prerequisites:** 
+   * Java Development Kit (JDK 17 or higher)
+   * JavaFX SDK
+   * MySQL Server (XAMPP or local instance) with database name `gymmembership`
+2. **Database Setup:** 
+   * Import the project SQL schema into your local MySQL instance.
+3. **Execution:** 
+   * Run the application through your IDE or build tool (Maven/Gradle) starting from the main application entry point.
 ## Software System Overview
 A desktop-based JavaFX and MySQL application designed to streamline gym operations. It features distinct workflows for **Members** (checking in, viewing available membership plans, selecting subscriptions, and monitoring payment history) and **Staff** (managing user records, reviewing attendance tracking logs, checking payment statuses, and maintaining membership options).
 
